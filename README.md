@@ -32,3 +32,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Demo
+### Counter - Redux Demo
+
+```http://localhost:3000/counter```
+
+The counter demo demostrate the working of react redux using a number counter. [Redux Tookit](https://redux-toolkit.js.org/) is used to streamline the creation of reducers.
+
+### Gists - SWR Demo
+
+```http://localhost:3000/gists```
+
+The Gists demo demostrate the working of [SWR](https://swr.vercel.app/) to fetch a list of gists from the Github Gits API.
+
+The [NextJS documentation on data fetching](https://nextjs.org/docs/basic-features/data-fetching) provide detailed information on different data fetching methods and use cases.
