@@ -17,6 +17,10 @@ describe('Gists Component', () => {
             html_url: 'http://example2.com',
             description: 'bazx',
         },
+        {
+            id: 3,
+            html_url: 'http://example3.com',
+        },
     ];
 
     describe('error loading gists', () => {

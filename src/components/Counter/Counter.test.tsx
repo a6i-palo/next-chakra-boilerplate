@@ -37,9 +37,7 @@ describe('Counter Component', () => {
     test('should set custom value on click of set button', () => {
         const customInputNode = screen.getByRole('spinbutton', {name: 'custom counter value'});
         fireEvent.change(customInputNode, {target: {value: '38'}});
-
-        waitFor(() => {
-            expect(screen.getByRole('spinbutton', {name: 'counter value'})).toHaveAttribute('value', '38');
-        });
+        fireEvent.click(screen.getByText('Set'));
+        expect(screen.getByRole('spinbutton', {name: 'counter value'})).toHaveAttribute('value', '38');
     });
 });

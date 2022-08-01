@@ -3,7 +3,7 @@ import {Box, Link} from '@chakra-ui/react';
 
 export interface IGist {
     html_url: string;
-    description: string;
+    description?: string;
     id: number;
 }
 
