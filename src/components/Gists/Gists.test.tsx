@@ -1,13 +1,10 @@
-import React from 'react';
-import {mount, ReactWrapper} from 'enzyme';
-import {act} from 'react-dom/test-utils';
-import {Link} from '@chakra-ui/react';
-import {SWRConfig} from 'swr';
 import {Gists, IGist} from './Gists';
+import {act} from 'react-dom/test-utils';
+import {render, screen} from '@testing-library/react';
 
 describe('Gists Component', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const _global = global as any;
-    let component: ReactWrapper;
 
     const mockGists: IGist[] = [
         {
@@ -18,7 +15,7 @@ describe('Gists Component', () => {
         {
             id: 2,
             html_url: 'http://example2.com',
-            description: 'baxz',
+            description: 'bazx',
         },
     ];
 
@@ -27,24 +24,19 @@ describe('Gists Component', () => {
             jest.spyOn(_global, 'fetch').mockImplementationOnce(() => Promise.reject(new Error()));
         });
 
-        test('should mount component with error', async () => {
-            component = mount(<Gists />);
-
-            expect(component.text()).toBe('...Loading Gists');
-
-            await act(async () => {
-                component.update();
+        beforeEach(async () => {
+            await act(() => {
+                render(<Gists />);
             });
+        });
 
-            expect(_global.fetch).toHaveBeenCalledTimes(1);
-            expect(_global.fetch).toHaveBeenCalledWith('https://api.github.com/gists');
-            _global.fetch.mockClear();
-
+        test('should display error message after calling api', async () => {
             act(() => {
-                component.update();
+                expect(_global.fetch).toHaveBeenCalledTimes(1);
+                expect(_global.fetch).toHaveBeenCalledWith('https://api.github.com/gists');
             });
 
-            expect(component.text()).toBe('An error occurred while fetching the data');
+            expect(screen.getByText('An error occurred while fetching the data')).toBeInTheDocument();
         });
     });
 
@@ -58,36 +50,21 @@ describe('Gists Component', () => {
             jest.spyOn(_global, 'fetch').mockImplementationOnce(() => mockFetchPromise);
         });
 
-        test('should mount component with loading text', async () => {
-            // SWR cache should be reseted in between tests
-            // https://swr.vercel.app/docs/advanced/cache#reset-cache-between-test-cases
-            component = mount(
-                <SWRConfig value={{provider: () => new Map()}}>
-                    <Gists />
-                </SWRConfig>,
-            );
-
-            expect(component.text()).toBe('...Loading Gists');
-
-            await act(async () => {
-                component.update();
+        beforeEach(async () => {
+            await act(() => {
+                render(<Gists />);
             });
-
-            expect(_global.fetch).toHaveBeenCalledTimes(1);
-            expect(_global.fetch).toHaveBeenCalledWith('https://api.github.com/gists');
-            _global.fetch.mockClear();
         });
 
-        test('should mount component with loaded data', () => {
+        test('should load data after calling api', async () => {
             act(() => {
-                component.update();
+                expect(_global.fetch).toHaveBeenCalledTimes(1);
+                expect(_global.fetch).toHaveBeenCalledWith('https://api.github.com/gists');
             });
-            const links = component.find(Link);
-            expect(links.length).toBe(2);
 
+            const links = screen.getAllByRole('link');
             links.forEach((link, i) => {
-                expect(link.text()).toBe(mockGists[i].description);
-                expect(link.props().href).toBe(mockGists[i].html_url);
+                expect(link).toHaveAttribute('href', mockGists[i].html_url);
             });
         });
     });

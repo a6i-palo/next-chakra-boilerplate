@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Box, HStack, NumberInput, NumberInputField, Button} from '@chakra-ui/react';
 import {useAppSelector, useAppDispatch} from '~/hooks/redux';
 import {incrementCounter, decrementCounter, setCounter} from '~/store/application/application.slice';
@@ -28,7 +28,7 @@ export const Counter = () => {
         <>
             <HStack>
                 <NumberInput value={counter}>
-                    <NumberInputField />
+                    <NumberInputField aria-label="counter value" />
                 </NumberInput>
                 <Button onClick={decrementCounterHandler}>-</Button>
                 <Button onClick={incrementCounterHandler}>+</Button>
@@ -36,7 +36,7 @@ export const Counter = () => {
             <Box>
                 <HStack>
                     <NumberInput precision={0} min={0} defaultValue={customCounter} onChange={setCustomCounterHandler}>
-                        <NumberInputField placeholder="Custom Counter Value" />
+                        <NumberInputField placeholder="Custom Counter Value" aria-label="custom counter value" />
                     </NumberInput>
                     <Button onClick={setCounterHandler} minW="90px">
                         Set

@@ -1,11 +1,37 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["next", "next/core-web-vitals", "eslint-config-prettier"],
-  "plugins": ["eslint-plugin-prettier", "react"],
+  "extends": [
+    "plugin:react/recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier"
+  ],
+  "plugins": ["eslint-plugin-prettier", "react", "@typescript-eslint"],
   "rules": {
-      "semi": "error",
-      "no-console": "error",
-      "prettier/prettier": "error"
+    "semi": [
+        "error"
+    ],
+    "quotes": ["error", "single"],
+    "no-console": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/array-type": "error",
+    "react/jsx-handler-names": "error",
+    "comma-dangle": [
+        "error",
+        "always-multiline"
+    ],
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": [
+        "error",
+        {
+            "max": 1,
+            "maxEOF": 1
+        }
+    ],
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": ["error", "never"],
+    "array-bracket-spacing": ["error", "never"],
+    "prettier/prettier": "error"
   },
   "parserOptions": {
       "ecmaVersion": 2019,

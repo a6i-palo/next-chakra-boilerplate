@@ -1,8 +1,8 @@
+import React from 'react';
+import '@testing-library/jest-dom'
 import 'whatwg-fetch';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import * as Enzyme from 'enzyme';
 
-Enzyme.configure({adapter: new Adapter()});
+global.React = React;
 
 afterEach(() => {
     jest.clearAllMocks();

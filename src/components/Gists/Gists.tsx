@@ -1,4 +1,3 @@
-import React from 'react';
 import {useAppSWR} from '~/hooks/swr';
 import {Box, Link} from '@chakra-ui/react';
 
