@@ -1,4 +1,4 @@
-import {render, screen, waitFor, fireEvent} from '@testing-library/react';
+import {render, screen, fireEvent} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '~/store';
 import {Counter} from './Counter';
